@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { auth, db } from '../firebase-config';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase-config';
+import {Link, useNavigate} from "react-router-dom";
 
-export default function Home({isAuth}) {
+export default function Home({setPostData}) {
 
   const [postsList, setPostsList] = useState([]);
 
   const postCollection = collection(db, "posts");
 
-  const deletePost = async(id)=> {
-    const postDoc = doc(db, "posts", id);
-    await deleteDoc(postDoc);
+  let navigate = useNavigate();
+
+  const postPage = (doc)=> {
+    setPostData(doc);
+    // localStorage.setItem("postID", doc.id);
+    navigate('/post');
   }
 
   useEffect(()=>{
@@ -34,22 +38,20 @@ export default function Home({isAuth}) {
   }
 
   return (
-    <div className='my-3 container'>
+    <div className='my-3 container mx-3' style={{margin: "80px 40px"}}>
+      <div className='row' style={{margin: "80px 10px 20px 20px"}}>
       {postsList.map((doc)=>{
-        return  <div key={doc.id}>
-                  <div className="card mb-5 mx-3">
-                    <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg" className="card-img-top" alt={doc.id}/>
-                    {isAuth && doc.author.id===auth.currentUser.uid && <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      <button type="button" className="btn btn-sm btn-outline-danger" onClick={()=>deletePost(doc.id)} style={{color: "white"}}>Delete</button>
-                    </span>}
+        return (<div key={doc.id} className="col-md-3 container">
+                  <div className="card mb-5 mx-3 my-3" style={{width: "18rem", height: "20rem"}}>
+                  <img style={{height: "12rem"}} src={doc.imageUrl!=""? doc.imageUrl : "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"} className="card-img-top" alt={doc.id}/>
                     <div className="card-body">
                       <h5 className="card-title">{doc.title}</h5>
-                      <p className="card-text">{doc.post}</p>
-                      <p className="card-text"><small className="text-muted">{doc.author.name}</small></p>
+                      <button className="btn btn-sm btn-primary" onClick={()=>postPage(doc)}>Read More</button>
                     </div>
                   </div>
-                </div>
+                </div>)
       })}
+      </div>
     </div>
   )
 }
