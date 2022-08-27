@@ -13,8 +13,8 @@ Storing the images of post using Firebase Storage and used Bootstrap framework f
 ## Screenshots
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/AnujPandey007/News-Web-App/master/screenshots/1.png" width="300"/>
-  <img src="https://raw.githubusercontent.com/AnujPandey007/News-Web-App/master/screenshots/2.png" width="300"/>
+  <img src="https://raw.githubusercontent.com/AnujPandey007/Blogking/master/screenshots/1.png" width="300"/>
+  <img src="https://raw.githubusercontent.com/AnujPandey007/Blogking/master/screenshots/2.png" width="300"/>
 </p>
 
 ## Ways to run the project 
