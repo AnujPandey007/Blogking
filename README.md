@@ -1,5 +1,5 @@
 # Blogking
-It is a news web app based on react with firebase, firestore and firebase storage integration. We can create our own post, like the post, delete the post and read other's post.
+It is a blog web app based on react with firebase, firestore and firebase storage integration. We can create our own post, like the post, delete the post and read other's post.
 
 ## Authentication
 Implemented login and register with Google Authentication using Firebase Authentication.
