@@ -1,7 +1,7 @@
-import React,{useEffect, useState} from 'react';
+import React,{ useState} from 'react';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase-config';
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 
 export default function PostDetails({isAuth, setAlert, postData}) {
@@ -43,7 +43,7 @@ export default function PostDetails({isAuth, setAlert, postData}) {
   return (
     <div className='container' style={{margin: "80px 40px"}}>
         <div className="card my-3">
-            <img src={postData.imageUrl!=""? postData.imageUrl : "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"} className="card-img-top" alt={postData.id}/>
+            <img src={postData.imageUrl!==""? postData.imageUrl : "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"} className="card-img-top" alt={postData.id}/>
             {isAuth && postData.author.id===auth.currentUser.uid && <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 <button type="button" className="btn btn-sm btn-outline-danger" onClick={()=>deletePost(postData.id)} style={{color: "white"}}>Delete</button>
             </span>}
